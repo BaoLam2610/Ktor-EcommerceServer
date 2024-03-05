@@ -1,3 +1,5 @@
 # Project exclude paths
 /.gradle/
 /build/
+/src/main/resources/product-image/
+/src/main/resources/profile-image/
