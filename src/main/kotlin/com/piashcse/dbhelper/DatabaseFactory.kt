@@ -47,7 +47,8 @@ object DatabaseFactory {
 //                OrdersTable,
 //                OrderItemTable,
 //                WishListTable,
-//                ShippingTable
+//                ShippingTable,
+//                EventTable
 //            )
         }
     }

@@ -1,11 +1,11 @@
 package com.piashcse.plugins
 
-import com.piashcse.controller.*
-import com.piashcse.route.*
 import com.papsign.ktor.openapigen.APITag
 import com.papsign.ktor.openapigen.openAPIGen
 import com.papsign.ktor.openapigen.route.apiRouting
 import com.papsign.ktor.openapigen.route.tag
+import com.piashcse.controller.*
+import com.piashcse.route.*
 import com.piashcse.utils.AppConstants
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -29,10 +29,9 @@ fun Application.configureRouting() {
             // construct reference to file
             // ideally this would use a different filename
             val file = File("${AppConstants.Image.PRODUCT_IMAGE_LOCATION}$filename")
-            if(file.exists()) {
+            if (file.exists()) {
                 call.respondFile(file)
-            }
-            else call.respond(HttpStatusCode.NotFound)
+            } else call.respond(HttpStatusCode.NotFound)
         }
         get("profile-image/{name}") {
             // get filename from request url
@@ -40,10 +39,9 @@ fun Application.configureRouting() {
             // construct reference to file
             // ideally this would use a different filename
             val file = File("${AppConstants.Image.PROFILE_IMAGE_LOCATION}$filename")
-            if(file.exists()) {
+            if (file.exists()) {
                 call.respondFile(file)
-            }
-            else call.respond(HttpStatusCode.NotFound)
+            } else call.respond(HttpStatusCode.NotFound)
         }
         // Api routing
         apiRouting {
@@ -80,6 +78,9 @@ fun Application.configureRouting() {
             tag(Tags.SHIPPING) {
                 shippingRoute(ShippingController())
             }
+            tag(Tags.EVENT) {
+                eventRoute(EventController())
+            }
         }
     }
 }
@@ -96,5 +97,6 @@ enum class Tags(override val description: String) : APITag {
     ORDER(""),
     WISHLIST(""),
     SHIPPING(""),
-    IMAGE("")
+    EVENT(""),
+    IMAGE(""),
 }
