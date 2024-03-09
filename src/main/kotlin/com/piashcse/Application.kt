@@ -1,11 +1,15 @@
 package com.piashcse
 
 import com.piashcse.dbhelper.DatabaseFactory
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import com.piashcse.plugins.*
+import com.piashcse.models.global.ServerConfig
+import com.piashcse.plugins.configureAuthentication
+import com.piashcse.plugins.configureBasic
+import com.piashcse.plugins.configureRouting
+import com.piashcse.plugins.configureStatusPage
 import com.typesafe.config.ConfigFactory
 import io.ktor.server.config.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
 import org.slf4j.LoggerFactory
 
 fun main() {
@@ -29,3 +33,5 @@ fun main() {
     }
     embeddedServer(Netty, appEngineEnv).start(wait = true)
 }
+
+lateinit var serverConfig: ServerConfig

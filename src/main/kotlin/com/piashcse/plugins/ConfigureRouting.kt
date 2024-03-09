@@ -22,7 +22,7 @@ fun Application.configureRouting() {
         get("/") {
             call.respondRedirect("/swagger-ui/index.html?url=/openapi.json", true)
         }
-        get("product-image/{name}") {
+        get("${AppConstants.Image.PRODUCT_FOLDER}/{name}") {
             // get filename from request url
             val filename = call.parameters["name"]!!
             println("lamnb: $filename")
@@ -33,7 +33,7 @@ fun Application.configureRouting() {
                 call.respondFile(file)
             } else call.respond(HttpStatusCode.NotFound)
         }
-        get("profile-image/{name}") {
+        get("${AppConstants.Image.PROFILE_FOLDER}profile-image/{name}") {
             // get filename from request url
             val filename = call.parameters["name"]!!
             // construct reference to file
@@ -81,6 +81,9 @@ fun Application.configureRouting() {
             tag(Tags.EVENT) {
                 eventRoute(EventController())
             }
+            tag(Tags.HOME) {
+                homeRoute(HomeController())
+            }
         }
     }
 }
@@ -98,5 +101,6 @@ enum class Tags(override val description: String) : APITag {
     WISHLIST(""),
     SHIPPING(""),
     EVENT(""),
+    HOME(""),
     IMAGE(""),
 }

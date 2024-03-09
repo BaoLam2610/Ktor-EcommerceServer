@@ -1,6 +1,7 @@
 package com.piashcse.utils.extension
 
 import com.piashcse.models.user.body.MultipartImage
+import com.piashcse.serverConfig
 import com.piashcse.utils.AppConstants
 import com.piashcse.utils.PageResult
 import kotlinx.coroutines.Dispatchers
@@ -91,6 +92,11 @@ suspend fun fileNameInServer(
         })
     }
     return uuid.toString().plus(fileLocation?.fileExtension())
+}
+
+fun String?.getImageUrl(folderRouting: String): String {
+    if (this.isNullOrEmpty()) return ""
+    return serverConfig.url + folderRouting + "/$this"
 }
 
 enum class OrderStatus {

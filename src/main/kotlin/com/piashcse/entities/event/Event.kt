@@ -5,6 +5,8 @@ import com.piashcse.entities.base.BaseIntEntityClass
 import com.piashcse.entities.base.BaseIntIdTable
 import com.piashcse.entities.base.currentUtc
 import com.piashcse.entities.user.UserTable
+import com.piashcse.utils.AppConstants
+import com.piashcse.utils.extension.getImageUrl
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.sql.javatime.datetime
 
@@ -31,7 +33,7 @@ class EventEntity(id: EntityID<String>) : BaseIntEntity(id, EventTable) {
         id.value,
         title,
         content,
-        bannerUrl,
+        bannerUrl.getImageUrl(AppConstants.Image.PRODUCT_FOLDER),
     )
 }
 

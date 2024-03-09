@@ -6,6 +6,8 @@ import com.piashcse.entities.base.BaseIntIdTable
 import com.piashcse.entities.product.category.ProductCategoryTable
 import com.piashcse.entities.product.category.ProductSubCategoryTable
 import com.piashcse.entities.user.UserTable
+import com.piashcse.utils.AppConstants
+import com.piashcse.utils.extension.getImageUrl
 import org.jetbrains.exposed.dao.id.EntityID
 
 object ProductTable : BaseIntIdTable("product") {
@@ -76,7 +78,7 @@ class ProductEntity(id: EntityID<String>) : BaseIntEntity(id, ProductTable) {
         hotNew,
         trend,
         buyOneGetOne,
-        imageOne,
+        imageOne?.getImageUrl(AppConstants.Image.PRODUCT_FOLDER),
         imageTwo
     )
 }
