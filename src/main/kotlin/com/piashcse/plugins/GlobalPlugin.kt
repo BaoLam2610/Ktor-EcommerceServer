@@ -49,7 +49,7 @@ fun Application.configureBasic() {
             }
         }
         // describe the server, add as many as you want
-        server("http://192.168.0.103:8080/") {
+        server(serverConfig.url!!) {
             description = "Base URL"
         }
         //optional custom schema object name
