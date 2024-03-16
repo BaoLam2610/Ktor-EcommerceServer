@@ -15,7 +15,7 @@ import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class ProductSubCategoryController {
-    suspend fun createProductSubCategory(productSubCategory: AddProductSubCategory) = query {
+    suspend fun createProductSubCategory(productSubCategory: AddProductSubCategory, fileName: String?) = query {
         val categoryIdExist = ProductCategoryEntity.find { ProductCategoryTable.id eq productSubCategory.categoryId }.toList().singleOrNull()
         if (categoryIdExist != null) {
             val subCategoryExist =
@@ -25,6 +25,7 @@ class ProductSubCategoryController {
                 ProductSubCategoryEntity.new {
                     categoryId = EntityID(productSubCategory.categoryId, ProductSubCategoryTable)
                     subCategoryName = productSubCategory.subCategoryName
+                    image = fileName
                 }.response()
             } else {
                 productSubCategory.subCategoryName.alreadyExistException()

@@ -25,7 +25,6 @@ fun Application.configureRouting() {
         get("${AppConstants.Image.PRODUCT_FOLDER}/{name}") {
             // get filename from request url
             val filename = call.parameters["name"]!!
-            println("lamnb: $filename")
             // construct reference to file
             // ideally this would use a different filename
             val file = File("${AppConstants.Image.PRODUCT_IMAGE_LOCATION}$filename")
@@ -33,12 +32,22 @@ fun Application.configureRouting() {
                 call.respondFile(file)
             } else call.respond(HttpStatusCode.NotFound)
         }
-        get("${AppConstants.Image.PROFILE_FOLDER}profile-image/{name}") {
+        get("${AppConstants.Image.PROFILE_FOLDER}/{name}") {
             // get filename from request url
             val filename = call.parameters["name"]!!
             // construct reference to file
             // ideally this would use a different filename
             val file = File("${AppConstants.Image.PROFILE_IMAGE_LOCATION}$filename")
+            if (file.exists()) {
+                call.respondFile(file)
+            } else call.respond(HttpStatusCode.NotFound)
+        }
+        get("${AppConstants.Image.CATEGORY_FOLDER}/{name}") {
+            // get filename from request url
+            val filename = call.parameters["name"]!!
+            // construct reference to file
+            // ideally this would use a different filename
+            val file = File("${AppConstants.Image.CATEGORY_IMAGE_LOCATION}$filename")
             if (file.exists()) {
                 call.respondFile(file)
             } else call.respond(HttpStatusCode.NotFound)

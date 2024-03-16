@@ -44,12 +44,12 @@ fun NormalOpenAPIRoute.profileRouting(profileController: ProfileController) {
             multipartData.validation()
 
             UUID.randomUUID()?.let { imageId ->
-                val fileLocation = multipartData.file.name?.let {
+                val fileLocation = multipartData.file?.name?.let {
                     "${AppConstants.Image.PROFILE_IMAGE_LOCATION}$imageId${it.fileExtension()}"
                 }
                 fileLocation?.let {
                     File(it).writeBytes(withContext(Dispatchers.IO) {
-                        multipartData.file.readAllBytes()
+                        multipartData.file!!.readAllBytes()
                     })
                 }
                 val fileNameInServer = imageId.toString().plus(fileLocation?.fileExtension())

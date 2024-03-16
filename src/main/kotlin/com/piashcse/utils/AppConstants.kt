@@ -26,10 +26,12 @@ object AppConstants {
     }
 
     object Image {
+        const val CATEGORY_IMAGE_LOCATION = "src/main/resources/category-image/"
         const val PROFILE_IMAGE_LOCATION = "src/main/resources/profile-image/"
         const val PRODUCT_IMAGE_LOCATION = "src/main/resources/product-image/"
         const val PRODUCT_FOLDER = "product-image"
         const val PROFILE_FOLDER = "profile-image"
+        const val CATEGORY_FOLDER = "category-image"
     }
 
     object ProductVariant {

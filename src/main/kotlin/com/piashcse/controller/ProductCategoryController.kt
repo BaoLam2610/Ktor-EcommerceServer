@@ -11,21 +11,22 @@ import com.piashcse.utils.extension.alreadyExistException
 import com.piashcse.utils.extension.isNotExistException
 
 class ProductCategoryController {
-   suspend fun createProductCategory(addProductCategory: AddProductCategory) = query {
+   suspend fun createProductCategory(addProductCategory: AddProductCategory, fileName: String? = null) = query {
         val categoryExist =
             ProductCategoryEntity.find { ProductCategoryTable.categoryName eq addProductCategory.categoryName }.toList().singleOrNull()
 
         if (categoryExist == null) {
             ProductCategoryEntity.new {
                 categoryName = addProductCategory.categoryName
+                image = fileName
             }.response()
         } else {
             addProductCategory.categoryName.alreadyExistException()
         }
     }
 
-    suspend fun getProductCategory(paging: PagingData) = query {
-        val categories = ProductCategoryEntity.all().limit(paging.pageSize, paging.offset)
+    suspend fun getProductCategory(paging: PagingData? = null) = query {
+        val categories = ProductCategoryEntity.all()//.limit(paging.pageSize, paging.offset)
         categories.map {
             it.response()
         }

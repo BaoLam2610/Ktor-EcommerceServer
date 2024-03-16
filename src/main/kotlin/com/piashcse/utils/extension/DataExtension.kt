@@ -83,19 +83,19 @@ suspend fun fileNameInServer(
     location: String = AppConstants.Image.PRODUCT_IMAGE_LOCATION
 ): String {
     val uuid = UUID.randomUUID()
-    val fileLocation = multipartData.file.name?.let {
+    val fileLocation = multipartData.file?.name?.let {
         "${location}$uuid${it.fileExtension()}"
     }
     fileLocation?.let {
         File(it).writeBytes(withContext(Dispatchers.IO) {
-            multipartData.file.readAllBytes()
+            multipartData.file!!.readAllBytes()
         })
     }
     return uuid.toString().plus(fileLocation?.fileExtension())
 }
 
-fun String?.getImageUrl(folderRouting: String): String {
-    if (this.isNullOrEmpty()) return ""
+fun String?.getImageUrl(folderRouting: String): String? {
+    if (this.isNullOrEmpty()) return null
     return serverConfig.url + folderRouting + "/$this"
 }
 

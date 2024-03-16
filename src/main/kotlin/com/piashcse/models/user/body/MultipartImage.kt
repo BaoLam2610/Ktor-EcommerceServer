@@ -7,7 +7,7 @@ import org.valiktor.functions.isNotNull
 import org.valiktor.validate
 
 @FormDataRequest
-open class MultipartImage(@PartEncoding("image/*") open val file: NamedFileInputStream) {
+open class MultipartImage(@PartEncoding("image/*") open val file: NamedFileInputStream?) {
     open fun validation() {
         validate(this) {
             validate(MultipartImage::file).isNotNull()

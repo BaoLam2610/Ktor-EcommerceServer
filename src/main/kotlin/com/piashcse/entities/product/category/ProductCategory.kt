@@ -3,6 +3,8 @@ package com.piashcse.entities.product.category
 import com.piashcse.entities.base.BaseIntEntity
 import com.piashcse.entities.base.BaseIntEntityClass
 import com.piashcse.entities.base.BaseIntIdTable
+import com.piashcse.utils.AppConstants
+import com.piashcse.utils.extension.getImageUrl
 import org.jetbrains.exposed.dao.id.EntityID
 
 object ProductCategoryTable : BaseIntIdTable("category") {
@@ -17,7 +19,12 @@ class ProductCategoryEntity(id: EntityID<String>) : BaseIntEntity(id, ProductCat
     private val subCategories by ProductSubCategoryEntity referrersOn ProductSubCategoryTable.categoryId
     var image by ProductCategoryTable.image
     fun response() =
-        ProductCategoryResponse(id.value, categoryName, subCategories.map { it.response() }, image)
+        ProductCategoryResponse(
+            id.value,
+            categoryName,
+            subCategories.map { it.response() },
+            image.getImageUrl(AppConstants.Image.CATEGORY_FOLDER)
+        )
 }
 
 data class ProductCategoryResponse(
